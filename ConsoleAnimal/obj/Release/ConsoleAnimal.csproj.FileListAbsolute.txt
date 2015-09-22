@@ -1,0 +1,5 @@
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\bin\Release\ConsoleAnimal.exe.config
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\bin\Release\ConsoleAnimal.exe
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\bin\Release\ConsoleAnimal.pdb
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Release\ConsoleAnimal.exe
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Release\ConsoleAnimal.pdb

@@ -1,0 +1,6 @@
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\bin\Debug\ConsoleAnimal.exe.config
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\bin\Debug\ConsoleAnimal.exe
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\bin\Debug\ConsoleAnimal.pdb
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Debug\ConsoleAnimal.csprojResolveAssemblyReference.cache
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Debug\ConsoleAnimal.exe
+c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Debug\ConsoleAnimal.pdb
