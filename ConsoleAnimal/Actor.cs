@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using AnimalEnvironmentItems;
+using AnimalLib;
+using FoodActionsLib;
 
-namespace ConsoleAnimal
+namespace Actor
 {
     public class Actor
     {
-        public FoodValueEvaluator SetFoodValueEvaluator(int energyValue, int lifeTime)
+        public FoodValueEvaluator SetFoodValueEvaluator(IDictionary<FoodItem, FoodDigestion> dictionary)
         {
-            return new FoodValueEvaluator(new KeyValuePair<int, int>(energyValue, lifeTime));
+            return new FoodValueEvaluator(dictionary);
         }
 
-        public HappinessEvaluator SetHappinessEvaluator(int energyValue, int lifeTime)
+        public ActionsAnalyser SetActionsAnalyser(IDictionary<ActionType, int> dictionary)
         {
-            return new HappinessEvaluator(new KeyValuePair<int, int>(energyValue, lifeTime));
+            return new ActionsAnalyser(dictionary);
         }
 
         public Animal SetAnimal(FoodValueEvaluator energyValueEvaluator,
-            HappinessEvaluator happinessEvaluator, int lifeTime)
+            ActionsAnalyser happinessEvaluator, int lifeTime, int remainingLifeTimeLimit)
         {
-            return new Animal(energyValueEvaluator, happinessEvaluator, new TimeSpan(0, 0, lifeTime));
+            return new Animal(energyValueEvaluator, happinessEvaluator, new TimeSpan(0, 0, lifeTime), 
+                new TimeSpan(0, 0, remainingLifeTimeLimit));
         }
 
         public EnvironmentArea SetEnvironmentArea(Animal animal)

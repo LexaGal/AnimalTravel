@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EA46804A-4722-480D-9807-E92BCA7D2886}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{3E310FA5-CCA7-46EB-81B0-8CDE0BB23619}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleAnimal</RootNamespace>
-    <AssemblyName>ConsoleAnimal</AssemblyName>
+    <RootNamespace>FoodActionsLib</RootNamespace>
+    <AssemblyName>FoodActionsLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,18 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
-    <Compile Include="Animal.cs" />
-    <Compile Include="EnergyValueEvaluator.cs" />
     <Compile Include="EnvironmentArea.cs" />
-    <Compile Include="Food.cs" />
-    <Compile Include="FoodValueEvaluator.cs" />
-    <Compile Include="HappinessEvaluator.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnimalEnvironmentItems\FoodActions.csproj">
+      <Project>{0cb8d8a3-cae8-4bcd-bcf4-5967f9e83276}</Project>
+      <Name>FoodActions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Animal\AnimalLib.csproj">
+      <Project>{2088c694-1e9f-45cd-9c40-b413fc898c08}</Project>
+      <Name>AnimalLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

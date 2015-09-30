@@ -18,14 +18,31 @@ namespace ConsoleAnimal
         public TimeSpan LifeTime { get; private set; } // seconds
         public double Happiness { get; private set; } // %
 
+        public TimeSpan RemainingLifeTimeLimit { get; private set; }
+
+        private readonly Random _sleepTimeRandom; 
+
+        public bool IsHappy
+        {
+            get { return Happiness >= 50; }
+        }
+
+        public bool IsHungry
+        {
+            get { return RemainingLifeTime.TotalSeconds <= RemainingLifeTimeLimit.TotalSeconds; }
+        }
+
+
         public Animal(FoodValueEvaluator foodValueEvaluator,
-            HappinessEvaluator happinessEvaluator, TimeSpan lifeTime)
+            HappinessEvaluator happinessEvaluator, TimeSpan remainingLifeTime, TimeSpan remainingLifeTimeLimit)
         {
             FoodValueEvaluator = foodValueEvaluator;
             HappinessEvaluator = happinessEvaluator;
-            RemainingLifeTime = lifeTime;
+            RemainingLifeTime = remainingLifeTime;
             LifeTime = new TimeSpan(0);
+            RemainingLifeTimeLimit = remainingLifeTimeLimit;
             Happiness = 50;
+            _sleepTimeRandom = new Random();
             Console.WriteLine("Animal is born\n");
         }
 
@@ -51,50 +68,50 @@ namespace ConsoleAnimal
             Console.Write("Animal is eating... ");
             if (GetFoodReaction(food) == FoodReaction.Dead)
             {
-                Console.WriteLine("\n");
-                return FoodReaction.Dead;
+                if (RemainingLifeTime.TotalSeconds/RemainingLifeTimeLimit.TotalSeconds < 0.5)
+                {
+                    Console.WriteLine("\n");
+                    return FoodReaction.Dead;
+                }
+                Console.Write("Food was refused");
             }
             Console.WriteLine("\n\nAnimal's remaining life time: {0} sec.\n", RemainingLifeTime.TotalSeconds);
             return FoodReaction.Alive;
         }
 
+        public void ChangeState(Food food, int happiness)
+        {
+            TimeSpan timeSpan = new TimeSpan(0, 0,
+                           Math.Abs(FoodValueEvaluator.EvaluateEnergyPlus(food) - FoodValueEvaluator.EvaluateEnergyMinus(food)));
+            Console.Write("{0}{1} to life", food.Type == FoodType.Harmful ? '-' : '+', timeSpan.TotalSeconds);
+            RemainingLifeTime = food.Type == FoodType.Harmful ? RemainingLifeTime.Subtract(timeSpan) : RemainingLifeTime.Add(timeSpan);
+            Happiness += HappinessEvaluator.Evaluate(happiness);
+        }
+
         public FoodReaction GetFoodReaction(Food food)
         {
-            TimeSpan timeSpan;
             switch (food.Type)
             {
-                case FoodType.Valuable: 
-                    timeSpan = new TimeSpan(0, 0, FoodValueEvaluator.Evaluate(food.EnergyValue * 2));
-                    Console.Write("+{0} to life", timeSpan.TotalSeconds);
-                    RemainingLifeTime = RemainingLifeTime.Add(timeSpan);
-                    Happiness += HappinessEvaluator.Evaluate(3);
+                case FoodType.Valuable:
+                    ChangeState(food, 3);
                     return FoodReaction.Alive;
 
-                case FoodType.TastyButUsefull:
-                    timeSpan = new TimeSpan(0, 0, FoodValueEvaluator.Evaluate(food.EnergyValue / 2));
-                    Console.Write("+{0} to life", timeSpan.TotalSeconds);
-                    RemainingLifeTime = RemainingLifeTime.Add(timeSpan);
-                    Happiness += HappinessEvaluator.Evaluate(4);
+                case FoodType.TastyButUseLess:
+                    ChangeState(food, 4);
                     return FoodReaction.Alive;
 
                 case FoodType.Neutral:
-                     timeSpan = new TimeSpan(0, 0, FoodValueEvaluator.Evaluate(food.EnergyValue));
-                     Console.Write("+{0} to life", timeSpan.TotalSeconds);
-                     RemainingLifeTime = RemainingLifeTime.Add(timeSpan);
-                     Happiness += HappinessEvaluator.Evaluate(2);
-                     return FoodReaction.Alive;
+                    ChangeState(food, 2);
+                    return FoodReaction.Alive;
 
                 case FoodType.Harmful:
-                    timeSpan = new TimeSpan(0, 0, FoodValueEvaluator.Evaluate(food.EnergyValue));
-                    Console.Write("-{0} to life", timeSpan.TotalSeconds);
-                    RemainingLifeTime = RemainingLifeTime.Subtract(timeSpan);
-                    Happiness += HappinessEvaluator.Evaluate(-2);
+                    ChangeState(food, -2);
                     return FoodReaction.Alive;
 
                 case FoodType.Killing:
                     return FoodReaction.Dead;
 
-                default :
+                default:
                     return FoodReaction.Alive;
             }
         }
@@ -103,6 +120,18 @@ namespace ConsoleAnimal
         {
             Console.WriteLine("Sorry, animal is dead ({0})\n", reason);
             Console.WriteLine("Animal's life time: {0} sec.\n----------------------------\n", LifeTime.TotalSeconds);
+        }
+
+        public void Sleep()
+        {
+            int remainingTime = (int)RemainingLifeTime.Subtract(RemainingLifeTimeLimit).TotalSeconds;
+            int sleepTime = remainingTime + _sleepTimeRandom.Next((-1)*remainingTime + 1, remainingTime/3);
+            TimeSpan timeSpan = new TimeSpan(0, 0, sleepTime);
+            
+            RemainingLifeTime = RemainingLifeTime.Subtract(timeSpan);
+            Console.WriteLine("Animal is sleepping ... -{0} to life\n", timeSpan.TotalSeconds);
+            LifeTime = LifeTime.Add(timeSpan);
+            Thread.Sleep(timeSpan);
         }
     }
 }

@@ -4,3 +4,9 @@ c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\
 c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Debug\ConsoleAnimal.csprojResolveAssemblyReference.cache
 c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Debug\ConsoleAnimal.exe
 c:\users\alex\documents\visual studio 2012\Projects\ConsoleAnimal\ConsoleAnimal\obj\Debug\ConsoleAnimal.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\ConsoleAnimal.exe.config
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\obj\Debug\ConsoleAnimal.exe
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\obj\Debug\ConsoleAnimal.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\ConsoleAnimal.exe
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\ConsoleAnimal.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\obj\Debug\ConsoleAnimal.csprojResolveAssemblyReference.cache

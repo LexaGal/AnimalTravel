@@ -1,0 +1,5 @@
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\AnimalEnvironmentItems\bin\Debug\AnimalEnvironmentItems.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\AnimalEnvironmentItems\bin\Debug\AnimalEnvironmentItems.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\AnimalEnvironmentItems\obj\Debug\AnimalEnvironmentItems.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\AnimalEnvironmentItems\obj\Debug\AnimalEnvironmentItems.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\AnimalEnvironmentItems\obj\Debug\AnimalEnvironmentItems.pdb

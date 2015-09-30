@@ -2,10 +2,19 @@
 
 namespace ConsoleAnimal
 {
+    public enum FoodItem
+    {
+        Apple,
+        Pear,
+        Meat,
+        Grass,
+        Carrot
+    }
+
     public enum FoodType
     {
         Valuable,
-        TastyButUsefull,
+        TastyButUseLess,
         Harmful,
         Killing,
         Neutral
@@ -13,13 +22,15 @@ namespace ConsoleAnimal
 
     public class Food
     {
-        public Food(int energyValue, FoodType type)
+        public Food(FoodType type, FoodItem item, int n)
         {
             Type = type;
-            EnergyValue = energyValue;
+            Item = item;
+            N = n;
         }
 
         public FoodType Type { get; private set; }
-        public int EnergyValue { get; private set; }
+        public FoodItem Item { get; private set; }
+        public int N { get; private set; }
     }
 }

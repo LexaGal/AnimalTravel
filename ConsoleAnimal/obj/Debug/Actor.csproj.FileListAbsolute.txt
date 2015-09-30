@@ -1,0 +1,12 @@
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\Actor.exe.config
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\Actor.exe
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\Actor.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\AnimalEnvironmentItems.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\AnimalLib.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\AnimalEnvironmentItems.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\AnimalLib.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\obj\Debug\Actor.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\obj\Debug\Actor.exe
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\obj\Debug\Actor.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\FoodActionsLib.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\ConsoleAnimal\AnimalTravel\ConsoleAnimal\bin\Debug\FoodActionsLib.pdb

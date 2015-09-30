@@ -19,7 +19,7 @@ namespace ConsoleAnimal
 
         public Food CreateFood()
         {
-            return new Food(_random.Next(3, 8), (FoodType) _random.Next(0, 5));
+            return new Food((FoodType)_random.Next(0, 5), (FoodItem)_random.Next(0, 3), _random.Next(1, 5));
         }
 
         public FoodReaction GiveFood(Food food)

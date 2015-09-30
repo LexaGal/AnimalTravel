@@ -8,9 +8,9 @@ namespace ConsoleAnimal
             : base(evaluationalPair)
         { }
 
-        public override int Evaluate(int energyValue)
+        public override int Evaluate(int value)
         {
-            return EvaluationalPair.Value * energyValue / EvaluationalPair.Key;
+            return EvaluationalPair.Value * value / EvaluationalPair.Key;
         }
     }
 }
