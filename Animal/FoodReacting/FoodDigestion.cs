@@ -1,4 +1,4 @@
-namespace AnimalLib
+namespace AnimalLib.FoodReacting
 {
     public class FoodDigestion
     {

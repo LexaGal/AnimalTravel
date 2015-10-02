@@ -1,49 +1,49 @@
 ﻿using System;
 using System.Threading;
 using AnimalEnvironmentItems;
+using AnimalEnvironmentItems.Foods;
+using AnimalLib.Evaluators;
+using AnimalLib.FoodReacting;
+using AnimalLib.State;
 
 namespace AnimalLib
 {
     public class Animal
     {
-        public FoodValueEvaluator FoodValueEvaluator { get; private set; }
-        public ActionsAnalyser ActionsAnalyser { get; private set; }
-
-        public TimeSpan RemainingLifeTime { get; private set; } // seconds
-        public TimeSpan LifeTime { get; private set; } // seconds
-        public double Happiness { get; private set; } // %
-
-        public TimeSpan RemainingLifeTimeLimit { get; private set; }
-
         private readonly Random _sleepTimeRandom; 
 
+        public IFoodValuesEvaluator FoodValueEvaluator { get; private set; }
+        public IActionsEvaluator ActionsEvaluator { get; private set; }
+
+        public InternalState InternalState { get; private set; }
+ 
         public bool IsHappy
         {
-            get { return Happiness >= 50; }
+            get { return InternalState.Happiness >= 50; }
         }
 
-        public bool IsHungry
+        public bool IsSatiated
         {
-            get { return RemainingLifeTime.TotalSeconds <= RemainingLifeTimeLimit.TotalSeconds; }
+            get { return InternalState.RemainingLifeTime.TotalSeconds >= InternalState.RemainingLifeTimeLimit.TotalSeconds; }
         }
 
-
-        public Animal(FoodValueEvaluator foodValueEvaluator,
-            ActionsAnalyser actionsAnalyser, TimeSpan remainingLifeTime, TimeSpan remainingLifeTimeLimit)
+        public bool IsHealthy
         {
+            get { return InternalState.Health >= 50; }
+        }
+
+        public Animal(InternalState internalState, IFoodValuesEvaluator foodValueEvaluator, IActionsEvaluator actionsEvaluator)
+        {
+            InternalState = internalState;
             FoodValueEvaluator = foodValueEvaluator;
-            ActionsAnalyser = actionsAnalyser;
-            RemainingLifeTime = remainingLifeTime;
-            LifeTime = new TimeSpan(0);
-            RemainingLifeTimeLimit = remainingLifeTimeLimit;
-            Happiness = 50;
+            ActionsEvaluator = actionsEvaluator;
             _sleepTimeRandom = new Random();
             Console.WriteLine("Animal is born\n");
         }
 
         public bool WillStayAlive(TimeSpan timeSpan)
         {
-            if (timeSpan.TotalSeconds <= RemainingLifeTime.TotalSeconds)
+            if (timeSpan.TotalSeconds <= InternalState.RemainingLifeTime.TotalSeconds)
             {
                 return true;
             }
@@ -52,8 +52,8 @@ namespace AnimalLib
 
         public void SearchForFood(TimeSpan timeSpan)
         {
-            RemainingLifeTime = RemainingLifeTime.Subtract(timeSpan);
-            LifeTime = LifeTime.Add(timeSpan);
+            InternalState.DecreaseRemainingLifeTime(timeSpan);
+            InternalState.IncreaseFullLifeTime(timeSpan);
             Console.WriteLine("Animal is searching for food... -{0} to life\n", timeSpan.TotalSeconds);
             Thread.Sleep(timeSpan);
         }
@@ -63,24 +63,38 @@ namespace AnimalLib
             Console.Write("Animal is eating... ");
             if (GetFoodReaction(food) == FoodReaction.Dead)
             {
-                if (RemainingLifeTime.TotalSeconds/RemainingLifeTimeLimit.TotalSeconds < 0.5)
+                if (InternalState.RemainingLifeTime.TotalSeconds/InternalState.RemainingLifeTimeLimit.TotalSeconds < 0.5)
                 {
                     Console.WriteLine("\n");
                     return FoodReaction.Dead;
                 }
                 Console.Write("Food was refused");
             }
-            Console.WriteLine("\n\nAnimal's remaining life time: {0} sec.\n", RemainingLifeTime.TotalSeconds);
+            Console.WriteLine("\n\nAnimal's remaining life time: {0} sec.\n", InternalState.RemainingLifeTime.TotalSeconds);
             return FoodReaction.Alive;
         }
 
-        public void ChangeState(Food food, int happiness)
+        public void ReactForFood(Food food, int happiness)
         {
             TimeSpan timeSpan = new TimeSpan(0, 0,
                            Math.Abs(FoodValueEvaluator.EvaluateEnergyPlus(food) - FoodValueEvaluator.EvaluateEnergyMinus(food)));
+            if (happiness >= 0)
+            {
+                InternalState.IncreaseHappiness(happiness);
+            }
+            else
+            {
+                InternalState.DecreaseHappiness(happiness);
+            }
+            if (food.Type != FoodType.Harmful)
+            {
+                InternalState.IncreaseRemainingLifeTime(timeSpan);
+            }
+            else
+            {
+                InternalState.DecreaseRemainingLifeTime(timeSpan);
+            }
             Console.Write("{0}{1} to life", food.Type == FoodType.Harmful ? '-' : '+', timeSpan.TotalSeconds);
-            RemainingLifeTime = food.Type == FoodType.Harmful ? RemainingLifeTime.Subtract(timeSpan) : RemainingLifeTime.Add(timeSpan);
-            Happiness += happiness;
         }
 
         public FoodReaction GetFoodReaction(Food food)
@@ -88,19 +102,19 @@ namespace AnimalLib
             switch (food.Type)
             {
                 case FoodType.Valuable:
-                    ChangeState(food, 3);
+                    ReactForFood(food, 3);
                     return FoodReaction.Alive;
 
                 case FoodType.TastyButUseless:
-                    ChangeState(food, 4);
+                    ReactForFood(food, 4);
                     return FoodReaction.Alive;
 
                 case FoodType.Neutral:
-                    ChangeState(food, 0);
+                    ReactForFood(food, 0);
                     return FoodReaction.Alive;
 
                 case FoodType.Harmful:
-                    ChangeState(food, -5);
+                    ReactForFood(food, -5);
                     return FoodReaction.Alive;
 
                 case FoodType.Killing:
@@ -114,18 +128,18 @@ namespace AnimalLib
         public void Die(string reason)
         {
             Console.WriteLine("Sorry, animal is dead ({0})\n", reason);
-            Console.WriteLine("Animal's life time: {0} sec.\n----------------------------\n", LifeTime.TotalSeconds);
+            Console.WriteLine("Animal's life time: {0} sec.\n----------------------------\n", InternalState.FullLifeTime.TotalSeconds);
         }
 
         public void Sleep()
         {
-            int remainingTime = (int)RemainingLifeTime.Subtract(RemainingLifeTimeLimit).TotalSeconds;
-            int sleepTime = remainingTime + _sleepTimeRandom.Next((-1)*remainingTime + 1, remainingTime/3);
+            int remainingTime = (int)InternalState.RemainingLifeTime.TotalSeconds;
+            int sleepTime = _sleepTimeRandom.Next(remainingTime/5, remainingTime/4);
             TimeSpan timeSpan = new TimeSpan(0, 0, sleepTime);
             
-            RemainingLifeTime = RemainingLifeTime.Subtract(timeSpan);
+            InternalState.DecreaseRemainingLifeTime(timeSpan);
             Console.WriteLine("Animal is sleepping ... -{0} to life\n", timeSpan.TotalSeconds);
-            LifeTime = LifeTime.Add(timeSpan);
+            InternalState.IncreaseFullLifeTime(timeSpan);
             Thread.Sleep(timeSpan);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace AnimalEnvironmentItems
+﻿namespace AnimalEnvironmentItems.Foods
 {
     public enum FoodItem
     {

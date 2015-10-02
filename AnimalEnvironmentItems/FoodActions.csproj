@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Food.cs" />
-    <Compile Include="FoodItem.cs" />
-    <Compile Include="FoodType.cs" />
+    <Compile Include="Actions\Action.cs" />
+    <Compile Include="Actions\ActionType.cs" />
+    <Compile Include="Foods\Food.cs" />
+    <Compile Include="Foods\FoodItem.cs" />
+    <Compile Include="Foods\FoodType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

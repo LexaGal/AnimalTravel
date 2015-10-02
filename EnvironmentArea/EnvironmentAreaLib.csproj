@@ -44,7 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\ActionFunction.cs" />
     <Compile Include="EnvironmentArea.cs" />
+    <Compile Include="Functions\EventTime.cs" />
+    <Compile Include="Functions\FoodFunction.cs" />
+    <Compile Include="Functions\IActionFunction.cs" />
+    <Compile Include="Functions\IFoodFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,11 +60,8 @@
       <Project>{0cb8d8a3-cae8-4bcd-bcf4-5967f9e83276}</Project>
       <Name>FoodActions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Animal\AnimalLib.csproj">
-      <Project>{2088c694-1e9f-45cd-9c40-b413fc898c08}</Project>
-      <Name>AnimalLib</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

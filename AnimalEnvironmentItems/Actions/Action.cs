@@ -1,11 +1,14 @@
 using System;
 
-namespace AnimalLib
+namespace AnimalEnvironmentItems.Actions
 {
     public class Action
     {
+        public Guid Id { get; private set; }
+
         public Action(ActionType type, TimeSpan duration)
         {
+            Id = Guid.NewGuid();
             Type = type;
             Duration = duration;
         }

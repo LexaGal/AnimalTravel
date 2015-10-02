@@ -1,11 +1,14 @@
 ﻿using System;
 
-namespace AnimalEnvironmentItems
+namespace AnimalEnvironmentItems.Foods
 {
     public class Food
     {
+        public Guid Id { get; private set; }
+
         public Food(FoodType type, FoodItem item, int n)
         {
+            Id = Guid.NewGuid();
             Type = type;
             Item = item;
             N = n;
