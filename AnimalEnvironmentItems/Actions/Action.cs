@@ -6,14 +6,16 @@ namespace AnimalEnvironmentItems.Actions
     {
         public Guid Id { get; private set; }
 
-        public Action(ActionType type, TimeSpan duration)
+        public Action(ActionItem item, ActionType type, TimeSpan duration)
         {
             Id = Guid.NewGuid();
-            Type = type;
+            Item = item;
             Duration = duration;
+            Type = type;
         }
 
-        public ActionType Type{ get; private set; }
+        public ActionItem Item { get; private set; }
+        public ActionType Type { get; private set; }
         public TimeSpan Duration { get; private set; }
     }
 }

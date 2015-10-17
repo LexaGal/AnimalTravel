@@ -17,8 +17,37 @@ namespace AnimalLib.State
             RemainingLifeTimeLimit = remainingLifeTimeLimit;
             FullLifeTime = new TimeSpan(0);
             Happiness = 50;
-            Health = 100;
+            Health = 50;
             Satiety = 50;
+        }
+
+        public void Change(StateDelta delta)
+        {
+            if (delta.Satiety > 0)
+            {
+                IncreaseSatiety(delta.Satiety);
+            }
+            else
+            {
+                DecreaseSatiety(delta.Satiety);
+            }
+            if (delta.Happiness > 0)
+            {
+                IncreaseHappiness(delta.Happiness);
+            }
+            else
+            {
+                DecreaseHappiness(delta.Happiness);
+            }
+            if (delta.Health > 0)
+            {
+                IncreaseHealth(delta.Health);
+            }
+            else
+            {
+                DecreaseHappiness(delta.Health);
+            }
+            RemainingLifeTime = RemainingLifeTime.Add(new TimeSpan(0, 0, (Health-50)/4 + (Satiety-50)/5 + (Happiness-50)/6));
         }
 
         public void IncreaseHappiness(int happiness)

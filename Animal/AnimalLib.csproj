@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,14 +46,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animal.cs" />
-    <Compile Include="FoodReacting\FoodDigestion.cs" />
-    <Compile Include="FoodReacting\FoodReaction.cs" />
-    <Compile Include="Evaluators\FoodValuesEvaluator.cs" />
+    <Compile Include="DeathReason.cs" />
+    <Compile Include="EnumDescriptor.cs" />
+    <Compile Include="EventsReacting\ActionReaction.cs" />
+    <Compile Include="EventsReacting\FoodReaction.cs" />
+    <Compile Include="EventsReacting\EventReaction.cs" />
+    <Compile Include="Evaluators\FoodEvaluator.cs" />
     <Compile Include="Evaluators\ActionsEvaluator.cs" />
     <Compile Include="Evaluators\IActionsEvaluator.cs" />
-    <Compile Include="Evaluators\IFoodValuesEvaluator.cs" />
+    <Compile Include="Evaluators\IFoodEvaluator.cs" />
+    <Compile Include="IAnimal.cs" />
     <Compile Include="State\InternalState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\StateDelta.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

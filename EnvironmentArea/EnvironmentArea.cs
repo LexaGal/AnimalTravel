@@ -8,7 +8,7 @@ using Action = AnimalEnvironmentItems.Actions.Action;
 
 namespace FoodActionsLib
 {
-    public class EnvironmentArea
+    public class EnvironmentArea : IEnvironmentArea
     {
         private readonly Random _creationTimeRandom; 
         public IActionFunction ActionFunction { get; private set; }
@@ -35,14 +35,12 @@ namespace FoodActionsLib
         {
             return FoodFunction.GetFood(
                 new TimeSpan(0, 0, _creationTimeRandom.Next(1, (int) FoodFunction.FoodsTimes.Max(f => f.Time.TotalSeconds))));
-            //return new Food((FoodType) _creationTimeRandom.Next(0, 5), (FoodItem) _creationTimeRandom.Next(0, 5), _creationTimeRandom.Next(1, 5));
         }
 
         public Action CreateAction()
         {
             return ActionFunction.GetAction(
                 new TimeSpan(0, 0, _creationTimeRandom.Next(1, (int)ActionFunction.ActionsTimes.Max(a => a.Time.TotalSeconds))));
-            //return new Action((ActionType)_creationTimeRandom.Next(0, 5), new TimeSpan(0, 0, _creationTimeRandom.Next(0, 5)));
         }
     }
 }
